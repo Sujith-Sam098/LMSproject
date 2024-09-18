@@ -30,17 +30,22 @@ public class EnrollmentService {
 
     public void updateEnrolledcount(String coursename, int enrolledcount)
     {
-        enrollmentRepo.updateEnrolledcount(enrolledcount, coursename);
+        Enrollment enroll = enrollmentRepo.findByCourseName(coursename);
+        if(enroll!=null)
+        {
+         enroll.setEnrolledcount(String.valueOf(enrolledcount));
+         enrollmentRepo.save(enroll);
+        }
     }
 
     public Enrollment fetchByCoursename(String coursename)
     {
-        return enrollmentRepo.findByCoursename(coursename);
+        return enrollmentRepo.findByCourseName(coursename);
     }
 
     public Enrollment fetchByCourseid(String courseid)
     {
-        return enrollmentRepo.findByCourseid(courseid);
+        return enrollmentRepo.findByCourseId(courseid);
     }
 
     public List<Enrollment> fetchByEnrolledusername(String enrolledusername)
@@ -70,7 +75,7 @@ public class EnrollmentService {
 
     public List<Enrollment> fetchByEnrolleddate(String enrolleddate)
     {
-        return (List<Enrollment>)enrollmentRepo.findByEnrolleddate(enrolleddate);
+        return (List<Enrollment>)enrollmentRepo.findByEnrolledDate(enrolleddate);
     }
 
     public List<Enrollment> fetchByCoursetype(String coursetype)

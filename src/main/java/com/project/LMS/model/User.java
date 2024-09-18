@@ -1,8 +1,8 @@
 package com.project.LMS.model;
 
-import jakarta.persistence.Id;
-import jakarta.persistence.UniqueConstraint;
+
 import lombok.*;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class User {
 
     @Id
-    private String userid;
+    private String userId;
     private String username;
     private String firstname;
     private String lastname;

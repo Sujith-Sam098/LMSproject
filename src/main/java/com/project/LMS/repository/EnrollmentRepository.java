@@ -1,16 +1,15 @@
 package com.project.LMS.repository;
 
 import com.project.LMS.model.Enrollment;
-import jakarta.transaction.Transactional;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
+
 
 import java.util.List;
-
 public interface EnrollmentRepository extends MongoRepository<Enrollment, String> {
-    public Enrollment findByCoursename(String coursename);
+    public Enrollment findByCourseName(String coursename);
 
-    public Enrollment findByCourseid(String courseid);
+    public Enrollment findByCourseId(String courseid);
 
     public List<Enrollment> findByEnrolledusername(String enrolledusername);
 
@@ -22,7 +21,7 @@ public interface EnrollmentRepository extends MongoRepository<Enrollment, String
 
     public List<Enrollment> findByInstructorinstitution(String instructorinstitution);
 
-    public List<Enrollment> findByEnrolleddate(String enrolleddate);
+    public List<Enrollment> findByEnrolledDate(String enrolleddate);
 
     public List<Enrollment> findByCoursetype(String coursetype);
 
@@ -30,7 +29,4 @@ public interface EnrollmentRepository extends MongoRepository<Enrollment, String
 
     public List<Enrollment> findByWebsiteurl(String websiteurl);
 
-    @Transactional
-    @Modifying
-    public void updateEnrolledcount(int enrolledcount, String coursename);
 }
