@@ -1,4 +1,4 @@
 package com.project.LMS.model;
 
-public class Professor {
+public class Admin {
 }
