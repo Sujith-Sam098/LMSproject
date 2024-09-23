@@ -1,4 +1,4 @@
 package com.project.LMS.service;
 
-public interface Service {
+public class courseServiceTest {
 }
