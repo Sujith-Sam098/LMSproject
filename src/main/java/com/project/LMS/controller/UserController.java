@@ -1,10 +1,13 @@
 package com.project.LMS.controller;
 
 import com.project.LMS.dto.UserDto;
+import com.project.LMS.model.Course;
 import com.project.LMS.model.User;
+import com.project.LMS.service.CourseService;
 import com.project.LMS.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +18,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private CourseService courseService;
 
     // Register a new user (OAuth2 flow handled by OAuth2UserService)
     @PostMapping("/register")
@@ -43,4 +49,14 @@ public class UserController {
         User user = userService.dropCourse(userId, courseId);
         return ResponseEntity.ok(user);
     }
+
+    @GetMapping("/home")
+    public ResponseEntity<?> userhome(@AuthenticationPrincipal User user)
+    {
+        List<Course> courses=  courseService.getAllCourses();
+        return ResponseEntity.ok(new UserHomeResponse(user,courses));
+    }
+
+
+    public record UserHomeResponse(User user, List<Course> courses) {}
 }
