@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CourseForumListener {
-    @RabbitListener(queues = "course.forum")
+    @RabbitListener(queues = "forumQueue")
     public void receiveMessage(String message) {
         System.out.println("Received Message: " + message);
         // Process the message (e.g., store it in a MongoDB collection for the course forum)

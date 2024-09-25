@@ -12,7 +12,7 @@ public class RabbitMqConfig {
 
     @Bean
     public Queue forumQueue() {
-        return new Queue("forumQueue", false);
+        return new Queue("forumQueue", true);
     }
 
     @Bean
@@ -21,7 +21,7 @@ public class RabbitMqConfig {
     }
 
     @Bean
-    public Binding binding(Queue courseForumQueue, TopicExchange courseForumExchange) {
-        return BindingBuilder.bind(courseForumQueue).to(courseForumExchange).with("course.forum.#");
+    public Binding binding(Queue forumQueue, TopicExchange forumExchange) {
+        return BindingBuilder.bind(forumQueue).to(forumExchange).with("course.forum.#");
     }
 }

@@ -19,7 +19,7 @@ public class MessageService {
 
     public void sendMessageToForum(String courseId, String message) {
         // Send message to RabbitMQ exchange
-        rabbitTemplate.convertAndSend("course.forum.exchange", "course.forum." + courseId, message);
+        rabbitTemplate.convertAndSend("forumExchange", "course.forum." + courseId, message);
 
         // Save message to MongoDB (for persistence)
         Message messageEntity = new Message(courseId, message, "sender"); // sender can be the current user
@@ -27,7 +27,7 @@ public class MessageService {
     }
 
     // Fetch messages for a course
-    public List<com.project.LMS.model.Message> getMessagesByCourseId(String courseId) {
+    public List<Message> getMessagesByCourseId(String courseId) {
         return messageRepository.findByCourseId(courseId);
     }
 
